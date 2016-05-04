@@ -1,0 +1,36 @@
+#	octothorpe
++	plus
+-	minus
+/	slash
+\	backslash
+*	asterisk
+%	percent
+<	less-than
+>	greater-than
+<=	less-than-equal
+>=	greater-than-equal
+_	underscore
+,	comma
+
+round()	四舍五入
+
+hilarious = False
+joke_evaluation = "Isn't that joke so funny?! %r"
+print joke_evaluation % hilarious
+会话：
+Isn't that joke so funny?! False
+
+print end1 + end2,
+print end3 + end4
+上段中的","表示打印结尾加空格，不换行
+
+%r用于测试，%s用于显示：
+%r打印出来的是你作为程序员写在脚本里的东西，而%s打印的是你作为用户应该看到东西。
+
+print "So, you're %r old, %r tall and %r heavy." % (
+	age, height, weight)
+中使用"("和"tab"可以实现语句的换行，print的值保持原样。
+
+终端中查看python命令的帮助信息（以raw_input为例）：
+python -m pydoc raw_input
+

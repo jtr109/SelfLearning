@@ -1,0 +1,15 @@
+#class scan(object):
+    
+def scan(sentence):
+    words = sentence.split()
+    atr = []
+        
+    whole_words = [('direction', 'north'), ('direction', 'south'), ('direction', 'east'),('direction', 'west')]
+        
+    for word in words:
+        for couple in whole_words:
+            if word == couple[1]:
+                atr.append(couple)
+                    
+    return atr
+

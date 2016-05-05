@@ -1,0 +1,67 @@
+normal-order evaluation: fully expand and then reduce;
+applicative-order evaluation: evaluate the arguments and then apply.
+
+Special form "if": To evaluate an "if" expression, the interpreter starts by evaluating the <predicate> part of the expression. If the <predicate> evaluates to a true value, the interpreter then evaluates the <consequent> and returns its value. Otherwise it evaluates the <alternative> and returns its value.
+
+If in applicative-order evaluation, the interpreter only evaluate one parameter in "if". When there is "if" in expended procedure, the <predicate> will be force evaluated.
+
+if; applicative-order;
+(sqrt-iter 1 9)
+; expand
+(if (good-enough? 1 9)
+    1
+    (sqrt-iter (improve 1 9) 9))
+; force evaluate the <predicate>, (good-enouth? 1 9) because of the special form of "if".
+(if #f
+    1
+    (sqrt-iter (improve 1 9) 9))
+; evaluate the <alternative>
+(sqrt-iter (improve 1 9) 9)
+; evaluate the arguments, because of applicative-order.
+(sqrt-iter 5 9)
+; expand
+(if (good-enough? 5 9)
+    5
+    (sqrt-iter (improve 5 9) 9))
+; force evaluate 
+(if #f
+    5
+    (sqrt-iter (improve 5 9) 9))
+; evaluate the <alternative>
+(sqrt-iter (improve 5 9) 9)
+; evaluate the arguments, because of applicative-order.
+(sqrt-iter 4 9)
+; loop until get the answer
+
+new-if; applicative-order;
+(sqrt-iter 1 9)
+; expand
+(new-if (good-enough? 1 9)
+        1
+        (sqrt-iter (improve 1 9) 9))
+; evaluate the arguments, because of applicative-order.
+(new-if (good-enough? 1 9)
+        1
+        (sqrt-iter 5 9))
+: expand & evaluate arguments
+(new-if (good-enough? 1 9)
+        1
+        (new-if (good-enough? 5 9)
+                5
+                (sqrt-iter 3.4 9)))
+(new-if (good-enough? 1 9)
+        1
+        (new-if (good-enough? 5 9)
+                5
+                (new-if (good-enough 3.4 9)
+                        3.4
+                        (sqrt-iter 3.02353 9))))
+; the procedure will loop infinity, even if the guess number is "good-enough". Because the applicative-order make the interpreter evaluate the argument without evalute true of false.
+
+
+
+Todo:
+BUT it is still a question: If we define a new "new-if":
+(define (new-if p c a)
+        (if p c a))
+What will happen?

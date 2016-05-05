@@ -1,0 +1,4 @@
+This procedure get the sum of a and the abusolute of b.
+If b is a positive number, a + b.
+a - b, otherwise.
+

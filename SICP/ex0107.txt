@@ -1,0 +1,2 @@
+In the case of small numbers such as 0.00000081 which sqrt root is 0.0009, the predetermined tolerance (0.001) is too bigger to be used. The procedure will return a unexpected value.
+In the other hand, if the "x" is too big, the difference between square guess and x might be 0 because of the machine precision.

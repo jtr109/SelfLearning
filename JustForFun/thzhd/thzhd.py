@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import urlparse
 
-MAX = 10
+MAX = 100
 FILENAME = 'new'
 path = 'http://thzhd.info/forum-182-1.html' # OuMei
 

@@ -22,6 +22,9 @@ DerivedData
 # Python
 *.pyc
 
-#example
+# example
 CSAPP/example/
+
+# others
+JustForFun/thzhd/new.html
 

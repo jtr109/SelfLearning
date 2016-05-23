@@ -22,3 +22,6 @@ DerivedData
 # Python
 *.pyc
 
+#example
+CSAPP/example/
+

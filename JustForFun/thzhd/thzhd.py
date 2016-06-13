@@ -7,8 +7,8 @@ import urlparse
 
 MAX = 100
 FILENAME = 'new'
-path = 'http://thzhd.info/forum-182-1.html' # OuMei
-
+path1 = 'http://thzhd.info/forum-182-1.html' # OuMei
+path2 = 'http://thzhd.info/forum-220-1.html' # Rihan
 
 def getWholePage(path):
     res = requests.get(path)
@@ -80,5 +80,17 @@ def getWholeHtml(path):
     f.close()
     print "** ALL DONE! **"
 
-if __name__ == '__main__':
+def chooseMode():
+    while True:
+        mode = raw_input('Oumei or Rihan? (o/r)')
+        if mode == 'o':
+            path = path1
+        elif mode == 'r':
+            path = path2
+        else:
+            continue
+        break
     getWholeHtml(path)
+
+if __name__ == '__main__':
+    chooseMode()

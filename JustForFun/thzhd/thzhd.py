@@ -7,10 +7,13 @@ import urlparse
 
 MAX = 100
 FILENAME = 'new'
-path_dic = {'o': 'http://thzhd.me/forum-182-1.html', # Ou mei
-            'r': 'http://thzhd.me/forum-220-1.html', # Ri han you ma
-            'w': 'http://thzhd.me/forum-181-1.html', # ri han Wu ma
-            'y': 'http://thzhd.me/forum-69-1.html'} # guo nei Yuan chuang
+BASE_DIR = 'http://thzhd.in/'
+path_dic = {
+    'o': BASE_DIR + 'forum-182-1.html', # Ou mei
+    'r': BASE_DIR + 'forum-220-1.html', # Ri han you ma
+    'w': BASE_DIR + 'forum-181-1.html', # ri han Wu ma
+    'y': BASE_DIR + 'forum-69-1.html', # guo nei Yuan chuang
+}
 
 def getWholePage(path):
     res = requests.get(path)
@@ -84,7 +87,7 @@ def getWholeHtml(path):
 
 def chooseMode():
     while True:
-        print "Ou mei;\nRi han;\ri han Wu ma;\nguo nei Yuan chuang?"
+        print "Ou mei;\nRi han;\nri han Wu ma;\nguo nei Yuan chuang?"
         mode = raw_input('(o/r/w/y)\n')
         if mode in ['o', 'r', 'w', 'y']:
             path = path_dic[mode]

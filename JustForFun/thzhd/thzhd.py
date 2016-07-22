@@ -5,9 +5,11 @@ import requests
 from bs4 import BeautifulSoup
 import urlparse
 
+BASE_DIR = 'http://thzhd.in/'
+
 MAX = 100
 FILENAME = 'new'
-BASE_DIR = 'http://thzhd.in/'
+
 path_dic = {
     'o': BASE_DIR + 'forum-182-1.html', # Ou mei
     'r': BASE_DIR + 'forum-220-1.html', # Ri han you ma
@@ -15,10 +17,13 @@ path_dic = {
     'y': BASE_DIR + 'forum-69-1.html', # guo nei Yuan chuang
 }
 
-def getWholePage(path):
+def getWholePage(path, count=0):
     res = requests.get(path)
     html_of_page = BeautifulSoup(res.text, "html.parser")
-    print '** "%s" has been loaded.' % path
+    if count > 0:
+        print '*%2d* "%s" has been loaded.' % (count, path)
+    else:
+        print '**** "%s" has been loaded.' % path
     return html_of_page
 
 
@@ -29,8 +34,8 @@ def getTorrent(path):
     return href
 
 
-def getFromPage(path, f):
-    html_of_page = getWholePage(path)
+def getFromPage(path, f, count):
+    html_of_page = getWholePage(path, count)
     h2 = ''
 
     title = html_of_page.select("span#thread_subject")[0].string.encode('utf-8')
@@ -50,7 +55,7 @@ def getFromPage(path, f):
     a = '<p><a href="' + href + '" target= "_blank">' + string_of_link + '</a></p>\n'
     f.write(a)
 
-    print '** "%s" had been writen.' % title
+    print '**** "%s" had been writen.' % title
 
 
 def getPageList(path, f):
@@ -58,17 +63,17 @@ def getPageList(path, f):
 
     list_of_pages = html.select('a.s.xst')
     del list_of_pages[0]
-    i = 0  #
+    count = 1  
     for link in list_of_pages:
         href_of_link = urlparse.urljoin(path, link.get('href'))
-        getFromPage(href_of_link, f)
-        i += 1  #
-        if i > MAX:  #
-            break  #
+        getFromPage(href_of_link, f, count)
+        count += 1  
+        if count > MAX:  
+            break  
 
 
-def getWholeHtml(path):
-    html_name = FILENAME + '.html'
+def getWholeHtml(path, mode):
+    html_name = mode + '.html'
     f = open(html_name, 'w')
     head = '<!DOCTYPE HTML>\n' \
            '<html>\n' \
@@ -94,7 +99,7 @@ def chooseMode():
         else:
             continue
         break
-    getWholeHtml(path)
+    getWholeHtml(path, mode)
 
 if __name__ == '__main__':
     chooseMode()

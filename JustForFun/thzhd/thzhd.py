@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import urlparse
 
-BASE_DIR = 'http://thzhd.in/'
+BASE_DIR = 'http://taohuabt.com/forum.php'
 
 MAX = 100
 FILENAME = 'new'

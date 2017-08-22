@@ -12,6 +12,11 @@ Page({
       url: '../logs/logs'
     })
   },
+  goToChangeName: function() {
+    wx.navigateTo({
+      url: '../change_name/index'
+    })
+  },
   onLoad: function () {
     console.log('onLoad')
     var that = this
